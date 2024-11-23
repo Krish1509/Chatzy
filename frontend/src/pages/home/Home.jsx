@@ -4,10 +4,12 @@ import { useEffect, useState, useRef, useCallback } from 'react';
 import ChatNotSelected from "../../components/NavigatSidebar/ChatNotSelected";
 import MessageContainer from "../../components/messages/MessageContainer";
 import useConversation from '../../zustand/useConversation';
+import AiChatHome from "../../components/AI_ChatBot/AI_ChatHome";
 
 const Home = () => {
-    const { selectedConversation, setSelectedConversation } = useConversation();
+    const { selectedConversation, setSelectedConversation } = useConversation(); // Zustand store
     const [chatWidth, setChatWidth] = useState(0);
+    const [showAiChatHome, setShowAiChatHome] = useState(false); // State for AI Chat Home
     const chatRef = useRef(null);
 
     const updateChatWidth = useCallback(() => {
@@ -16,12 +18,14 @@ const Home = () => {
         }
     }, []);
 
+    // Ensure AI Chat is closed if a conversation is selected
     useEffect(() => {
-        if (selectedConversation && chatRef.current) {
-            chatRef.current.focus();
+        if (selectedConversation) {
+            setShowAiChatHome(false);
         }
     }, [selectedConversation]);
 
+    // Handle browser back button and window resize events
     useEffect(() => {
         const handlePopState = () => {
             if (selectedConversation) {
@@ -43,23 +47,32 @@ const Home = () => {
 
     return (
         <div className="flex h-screen rounded-lg bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0">
+            {/* Left Sidebar */}
             <NavSidebar />
-            <div className={`md:flex ${selectedConversation ? 'hidden' : 'flex'}`}>
-                <Sidebar />
+
+            {/* Conversations Sidebar */}
+            <div className={`md:flex ${selectedConversation || showAiChatHome ? 'hidden' : 'flex'}`}>
+                <Sidebar onOpenAiChat={() => setShowAiChatHome(true)} />
             </div>
 
-                <div
-                    ref={chatRef}
-                    className={`flex flex-col w-full ${selectedConversation ? 'w-full' : 'hidden md:block w-full'} ${chatWidth <= 550 ? 'border-l border-gray-400' : ''}`}
-                >
-                    {!selectedConversation ? (
-                        <ChatNotSelected  />
-                    ) : (
-                        <MessageContainer />
-                    )}
-                </div>
+            {/* Chat Display */}
+            <div
+                ref={chatRef}
+                className={`flex flex-col w-full ${
+                    selectedConversation || showAiChatHome ? 'w-full' : 'hidden md:block w-full'
+                } ${chatWidth <= 550 ? 'border-l border-gray-400' : ''}`}
+            >
+                {/* Display Message Container or Fallbacks */}
+                {!selectedConversation && !showAiChatHome ? (
+                    <ChatNotSelected />
+                ) : showAiChatHome ? (
+                    <AiChatHome onClose={() => setShowAiChatHome(false)} />
+                ) : (
+                    <MessageContainer conversation={selectedConversation} />
+                )}
+            </div>
         </div>
     );
-}
+};
 
 export default Home;

@@ -5,7 +5,7 @@ import SignUp from './pages/signup/SignUp';
 import { Toaster } from 'react-hot-toast';
 import { useAuthContext } from './context/AuthContext';
 import About from "./pages/about/about";
-import ChatBot from './components/AI_ChatBot/ChatBot';
+import ChatBot from './components/AI_ChatBot/Ai_ChatBot';
 import { useState, useEffect } from 'react';
 import Loader from './components/Loder/Loader'; // Ensure the correct path to your Loader component
 
@@ -17,7 +17,7 @@ function App() {
     // Simulating an API call or delay to demonstrate the loader
     const timer = setTimeout(() => {
       setLoading(false); // After 3 seconds, set loading to false (adjust as needed)
-    }, 3000);
+    }, 2000);
 
     return () => clearTimeout(timer); // Clean up the timer
   }, []);

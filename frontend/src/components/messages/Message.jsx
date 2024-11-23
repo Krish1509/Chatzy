@@ -50,19 +50,19 @@ const Message = ({ message }) => {
                         href={part} 
                         target="_blank" 
                         rel="noopener noreferrer" 
-                        className="text-[#FFFFFF] hover:text-gray-100 hover:underline  font-semibold cursor-pointer" // Style the link
+                        className="text-[#FFFFFF] hover:text-gray-100 hover:underline  font-semibold cursor-pointer"
                     >
                         {part}
                     </a>
                 );
             }
             // Otherwise, return the text part
-            return <span key={index} className="text-white">{part}</span>; // Keep text white
+            return <span key={index} className="text-white">{part}</span>;
         });
     };
 
     return (
-        <div className={`chat ${chatClassName}`}>
+        <div className={`chat ${chatClassName} overflow-x-hidden`}>
             <div className="chat-image avatar">
                 <div className="w-10 rounded-full">
                     <img src={profilePic} alt="Profile" />
@@ -88,7 +88,7 @@ const Message = ({ message }) => {
                         </button>
                     </div>
                 )}
-                <div className={`chat-bubble ${bubbleBgColor} pb-2 max-w-[80%]`}>
+                <div className={`chat-bubble ${bubbleBgColor} pb-2 max-w-[90%]`}>
                     <div className="overflow-hidden whitespace-normal break-words max-w-full">
                         {/* Format message with clickable links */}
                         {formatMessageWithLinks(message.message)}
@@ -100,4 +100,8 @@ const Message = ({ message }) => {
     );
 };
 
+
+
+
 export default Message;
+

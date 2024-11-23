@@ -8,6 +8,7 @@ import FullscreenButton from './FullscreenButton';
 import { IoIosHome, IoIosInformationCircle, IoIosSettings } from "react-icons/io";
 import { useNavigate } from 'react-router-dom';
 import Settings from './Settings/Settings'; // Import the new Settings component
+import AnimationIcon from "../AI_ChatBot/AnimatedIcon"
 
 const NavSidebar = () => {
     const navigate = useNavigate();
@@ -20,7 +21,7 @@ const NavSidebar = () => {
     const [hoveredButton, setHoveredButton] = useState(null);
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
     const [isBgChangerOpen, setIsBgChangerOpen] = useState(false); // State to track if BG Changer is open
-    const [selectedButton, setSelectedButton] = useState('');
+    const [selectedButton, setSelectedButton] = useState(''); // Track the selected button or chat
     const sidebarRef = useRef(null);
 
     const isOnline = authUser && onlineUsers.includes(authUser._id);
@@ -55,8 +56,11 @@ const NavSidebar = () => {
     };
 
     const handleHomeClick = () => {
-        setSelectedButton('home');
-        navigate('/');
+        // Only set the home as selected if no conversation is active
+        if (selectedButton === '') {
+            setSelectedButton('home'); // Set home if no other chat is selected
+        }
+        navigate('/'); // Navigate to the home page
     };
 
     const handleAboutClick = () => {
@@ -68,8 +72,13 @@ const NavSidebar = () => {
         setIsBgChangerOpen(!isBgChangerOpen); // Toggle the BG Changer visibility
     };
 
+    const handleChatbotClick = () => {
+        setSelectedButton('chatbot'); // Set chatbot as the selected button
+        navigate('/chatbot'); // Navigates to the chatbot route
+    };
+
     return (
-        <div ref={sidebarRef} className="flex flex-col h-full bg-[#6470800c] items-center relative  border-r border-gray-400">
+        <div ref={sidebarRef} className="flex flex-col h-full bg-[#6470800c] items-center relative border-r border-gray-400">
             {/* Fullscreen Button */}
             <div 
                 className="relative m-4 z-10"
@@ -102,6 +111,8 @@ const NavSidebar = () => {
                         </div>
                     )}
                 </a>
+                
+                {/* About Button */}
                 <div 
                     className={`relative z-10 rounded-full ${selectedButton === 'about' ? 'bg-[#1F2937]' : ''}`} 
                     onMouseEnter={() => setHoveredButton('about')}
@@ -115,6 +126,8 @@ const NavSidebar = () => {
                         </div>
                     )}
                 </div>
+
+                {/* Settings Button */}
                 <div 
                     className={`relative z-10 rounded-full ${selectedButton === 'settings' ? 'bg-[#1F2937]' : ''}`}
                     onMouseEnter={() => setHoveredButton('settings')}
@@ -125,6 +138,21 @@ const NavSidebar = () => {
                     {hoveredButton === 'settings' && (
                         <div className="absolute left-full transform -translate-y-1/2 ml-2 p-2 bg-gray-700 text-white text-sm font-semibold rounded shadow-lg">
                             Settings
+                        </div>
+                    )}
+                </div>
+
+                {/* Chatbot Button */}
+                <div 
+                    className="relative z-10 rounded-full"
+                    onMouseEnter={() => setHoveredButton('chatbot')}
+                    onMouseLeave={() => setHoveredButton(null)}
+                    onClick={handleChatbotClick}
+                >
+                    <AnimationIcon />
+                    {hoveredButton === 'chatbot' && (
+                        <div className="absolute left-full transform -translate-y-1/2 ml-2 p-2 bg-gray-700 text-white text-sm font-semibold rounded shadow-lg">
+                            Chatbot
                         </div>
                     )}
                 </div>
@@ -140,7 +168,8 @@ const NavSidebar = () => {
             )}
 
             {/* Bottom section */}
-            <div className="mt-auto my-4 flex flex-col items-center gap-6 ">
+            <div className="mt-auto my-4 flex flex-col items-center gap-6">
+                {/* Profile Button */}
                 <div
                     className="relative cursor-pointer"
                     onMouseEnter={() => setIsProfileHovered(true)}
@@ -154,20 +183,21 @@ const NavSidebar = () => {
                             className={`w-10 h-10 rounded-full object-cover ${isOnline ? 'ring-2 ring-green-500' : ''}`}
                         />
                     </div>
-                    
                     {isProfileHovered && (
                         <div className="absolute right-0 transform translate-x-full bottom-full mb-1 w-40 p-2 bg-gray-700 text-white text-sm font-semibold rounded-full shadow-lg z-50">
                             This is your profile.
                         </div>
                     )}
                 </div>
+
+                {/* Logout Button */}
                 <div
                     onMouseEnter={() => setIsLogoutHovered(true)}
                     onMouseLeave={() => setIsLogoutHovered(false)}
                 >
-                    <LogoutButton className="text-white text-2xl cursor-pointer " />
+                    <LogoutButton className="text-white text-2xl cursor-pointer" />
                     {isLogoutHovered && (
-                        <div className="absolute left-full transform -translate-y-1/2 ml-2 p-2 bg-gray-700 text-white text-sm font-semibold rounded shadow-lg z-10 mb-4 bottom-1 ">
+                        <div className="absolute left-full transform -translate-y-1/2 ml-2 p-2 bg-gray-700 text-white text-sm font-semibold rounded shadow-lg z-10 mb-4 bottom-1">
                             Logout
                         </div>
                     )}
@@ -178,18 +208,18 @@ const NavSidebar = () => {
             {isProfileModalOpen && (
                 <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
                     <div className="bg-[#1d232ade] p-4 rounded-lg w-full max-w-sm relative">
-                    <button
-                                className="absolute top-2 right-2 p-2 rounded-full bg-gray-400 hover:bg-gray-400 transition-colors duration-300 z-10 cursor-pointer"
-                                onClick={handleCloseProfileModal}
-                            >
-                                <IoClose className="text-gray-700 text-xl cursor-pointer" />
-                            </button>
+                        <button
+                            className="absolute top-2 right-2 p-2 rounded-full bg-gray-400 hover:bg-gray-400 transition-colors duration-300 z-10 cursor-pointer"
+                            onClick={handleCloseProfileModal}
+                        >
+                            <IoClose className="text-gray-700 text-xl cursor-pointer" />
+                        </button>
                         <Profile />
                     </div>
                 </div>
             )}
         </div>
     );
-}
+};
 
 export default NavSidebar;
