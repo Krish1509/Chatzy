@@ -1,13 +1,13 @@
-import { useState } from 'react';
-import SearchInput from './SearchInput';
-import Conversations from './Conversations';
-import Aibot from './ai_bot';
+import { useState } from "react";
+import SearchInput from "./SearchInput";
+import Conversations from "./Conversations";
+import AiBot from "./ai_bot";
 
 const Sidebar = ({ onOpenAiChat }) => {
     const [selected, setSelected] = useState(null); // Tracks selected item (null, 'AI', or conversation ID)
 
     const handleSelectAiBot = () => {
-        setSelected('AI'); // Mark AI Bot as selected
+        setSelected("AI"); // Mark AI Bot as selected
         onOpenAiChat(); // Trigger action to open AI Bot chat
     };
 
@@ -22,7 +22,7 @@ const Sidebar = ({ onOpenAiChat }) => {
             
             {/* AI Bot */}
             <div onClick={handleSelectAiBot} className="cursor-pointer">
-                <Aibot isSelected={selected === 'AI'} />
+                <AiBot isSelected={selected === "AI"} />
             </div>
 
             {/* Conversations */}

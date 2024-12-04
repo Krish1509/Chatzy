@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "chat-app-yt": "file:..",
-    "dotenv": "^16.4.5",
+    "dotenv": "^16.4.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
@@ -22,6 +22,7 @@
     "zustand": "^4.5.0"
   },
   "devDependencies": {
+    "@types/node": "^22.10.1",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
     "@vitejs/plugin-react": "^4.2.1",
