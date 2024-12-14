@@ -32,11 +32,10 @@ const Ai_ChatBot = ({ onClose }) => {
         url: `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${import.meta.env.VITE_API_KEY}`,
         method: "post",
         data: {
-          contents: [{ parts: [{ text: currentQuestion }] }],
+          contents: [{ parts: [{ text: currentQuestion }] }],  
         },
-      
       });
-  
+
       const aiResponse = response.data.candidates[0].content.parts[0].text;
       setChatHistory((prev) => [...prev, { type: "answer", content: aiResponse }]);
     } catch (error) {
@@ -49,8 +48,6 @@ const Ai_ChatBot = ({ onClose }) => {
       setGeneratingAnswer(false);
     }
   };
-  
-  
 
   return (
     <div className="fixed inset-0 z-50 flex flex-col bg-transparent text-gray-100">
@@ -58,7 +55,7 @@ const Ai_ChatBot = ({ onClose }) => {
       <header className="flex flex-col p-4 bg-gradient-to-r from-purple-800 to-indigo-600 shadow-lg bg-opacity-70">
         <div className="flex items-center gap-2">
           <FaRobot size={24} className="text-white" />
-          <span className="text-xl font-semibold tracking-wide">AI Assistant</span>
+          <span className="text-xl font-semibold tracking-wide">Chatzy Bot</span>
         </div>
         {/* Online status */}
         <div className="flex items-center gap-2 mt-2">
@@ -86,7 +83,7 @@ const Ai_ChatBot = ({ onClose }) => {
         {chatHistory.length === 0 ? (
           <div className="flex items-center justify-center h-full">
             <div className="text-center animate-fade-in">
-              <h2 className="text-2xl font-bold text-purple-300">Hello! 👋</h2>
+              <h2 className="text-2xl font-bold text-purple-300 animate__animated animate__fadeIn animate__delay-2s">Hello, I am Chatzy Bot! 👋</h2>
               <p className="text-gray-400 mt-2">Ask me anything, and I'll help you out!</p>
               <p className="text-xl text-gray-500 mt-4">😊</p>
             </div>
@@ -98,11 +95,7 @@ const Ai_ChatBot = ({ onClose }) => {
               className={`flex ${chat.type === "question" ? "justify-end" : "justify-start"}`}
             >
               <div
-                className={`relative max-w-[70%] px-4 py-3 rounded-lg shadow-md transition-transform ${
-                  chat.type === "question"
-                    ? "bg-gradient-to-r from-purple-600 to-indigo-500 text-white self-end animate-bounce-right"
-                    : "bg-gray-800 text-gray-300 self-start animate-bounce-left"
-                }`}
+                className={`relative max-w-[70%] px-4 py-3 rounded-lg shadow-md transition-transform ${chat.type === "question" ? "bg-gradient-to-r from-purple-600 to-indigo-500 text-white self-end animate-bounce-right" : "bg-gray-800 text-gray-300 self-start animate-bounce-left"}`}
               >
                 <ReactMarkdown>{chat.content}</ReactMarkdown>
               </div>
@@ -137,9 +130,7 @@ const Ai_ChatBot = ({ onClose }) => {
           ></textarea>
           <button
             type="submit"
-            className={`px-6 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 text-white font-medium shadow-lg transition-all ${
-              generatingAnswer ? "opacity-50 cursor-not-allowed" : ""
-            }`}
+            className={`px-6 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 text-white font-medium shadow-lg transition-all ${generatingAnswer ? "opacity-50 cursor-not-allowed" : ""}`}
             disabled={generatingAnswer}
           >
             Send
