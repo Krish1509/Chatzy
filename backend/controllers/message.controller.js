@@ -1,64 +1,82 @@
-import Conversation from "../models/conversation.model.js";
 import Message from "../models/message.model.js";
+import Conversation from "../models/conversation.model.js";
 import { getReceiverSocketId, io } from "../socket/socket.js";
 
 export const sendMessage = async (req, res) => {
-    try {
-        const { message } = req.body;
-        const { id: receiverId } = req.params;
-        const senderId = req.user._id;
+  try {
+    const { message } = req.body; // Plain message from the request body
+    const { id: receiverId } = req.params;
+    const senderId = req.user._id;
 
-        let conversation = await Conversation.findOne({
-            participants: { $all: [senderId, receiverId] }
-        });
+    // Check if conversation exists
+    let conversation = await Conversation.findOne({
+      participants: { $all: [senderId, receiverId] },
+    });
 
-        if (!conversation) {
-            conversation = await Conversation.create({
-                participants: [senderId, receiverId],
-            });
-        }
-
-        const newMessage = new Message({
-            senderId,
-            receiverId,
-            message,
-        });
-
-        conversation.messages.push(newMessage._id);
-        await Promise.all([conversation.save(), newMessage.save()]);
-
-        const receiverSocketId = getReceiverSocketId(receiverId);
-        if (receiverSocketId) {
-            io.to(receiverSocketId).emit("newMessage", newMessage);
-        }
-
-        res.status(201).json(newMessage);
-
-    } catch (error) {
-        console.error("Error in sendMessage controller:", error.message);
-        res.status(500).json({ error: "Internal server error" });
+    if (!conversation) {
+      // Create a new conversation if it doesn't exist
+      conversation = await Conversation.create({
+        participants: [senderId, receiverId],
+      });
     }
+
+    // Encrypt the message content before saving it
+    const newMessage = new Message({
+      senderId,
+      receiverId,
+      encryptedMessage: message, // Save the plain message as encrypted
+    });
+
+    // Push the new message ID to the conversation messages array
+    conversation.messages.push(newMessage._id);
+
+    // Save the message and conversation
+    await Promise.all([conversation.save(), newMessage.save()]);
+
+    // Get the receiver's socket ID for real-time notification
+    const receiverSocketId = getReceiverSocketId(receiverId);
+    if (receiverSocketId) {
+      // Emit the new message event with the decrypted message
+      io.to(receiverSocketId).emit("newMessage", {
+        ...newMessage.toObject(),
+        message: newMessage.decryptMessage(), // Decrypt for real-time notification
+      });
+    }
+
+    res.status(201).json(newMessage); // Return the new message response
+  } catch (error) {
+    console.error("Error in sendMessage controller:", error.message);
+    res.status(500).json({ error: "Internal server error" });
+  }
 };
+
+
 
 export const getMessages = async (req, res) => {
-    try {
-        const { id: userToChatId } = req.params;
-        const senderId = req.user._id;
+  try {
+    const { id: userToChatId } = req.params;
+    const senderId = req.user._id;
 
-        const conversation = await Conversation.findOne({
-            participants: { $all: [senderId, userToChatId] }
-        }).populate("messages");
+    const conversation = await Conversation.findOne({
+      participants: { $all: [senderId, userToChatId] },
+    }).populate("messages");
 
-        if (!conversation) return res.status(200).json([]);
+    if (!conversation) return res.status(200).json([]); // No messages found
 
-        const messages = conversation.messages;
-        res.status(200).json(messages);
+    // Decrypt each message before returning it
+    const messages = conversation.messages.map((msg) => ({
+      ...msg.toObject(),
+      message: msg.decryptMessage(), // Decrypt the message
+    }));
 
-    } catch (error) {
-        console.error("Error in getMessages controller:", error.message);
-        res.status(500).json({ error: "Internal server error" });
-    }
+    res.status(200).json(messages); // Return decrypted messages
+  } catch (error) {
+    console.error("Error in getMessages controller:", error.message);
+    res.status(500).json({ error: "Internal server error" });
+  }
 };
+  
+
 
 
 export const deleteMessage = async (req, res) => {

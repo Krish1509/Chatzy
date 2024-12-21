@@ -51,7 +51,7 @@ const Home = () => {
             <NavSidebar />
 
             {/* Conversations Sidebar */}
-            <div className={`md:flex ${selectedConversation || showAiChatHome ? 'hidden' : 'flex'}`}>
+            <div className={`md:flex w-full md:w-auto ${selectedConversation || showAiChatHome ? 'hidden' : 'flex'}`}>
                 <Sidebar onOpenAiChat={() => setShowAiChatHome(true)} />
             </div>
 

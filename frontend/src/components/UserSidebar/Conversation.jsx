@@ -2,7 +2,7 @@ import { useSocketContext } from "../../context/SocketContext";
 import useConversation from "../../zustand/useConversation";
 
 const Conversation = ({ conversation, lastIdx, emoji }) => {
-    const { selectedConversation, setSelectedConversation, isAiSelected, setAiSelected  } = useConversation();
+    const { selectedConversation, setSelectedConversation  } = useConversation();
     const { onlineUsers } = useSocketContext();
 
     const isSelected = selectedConversation?._id === conversation._id;
@@ -11,7 +11,7 @@ const Conversation = ({ conversation, lastIdx, emoji }) => {
     return (
         <>
             <div
-                className={`flex items-center gap-2 p-2 rounded cursor-pointer hover:bg-sky-500 ${
+                className={`flex items-center  gap-2 p-2 rounded cursor-pointer hover:bg-sky-500 ${
                     isSelected ? "bg-sky-500" : ""
                 }`}
                 onClick={() => setSelectedConversation(conversation)} // Select conversation

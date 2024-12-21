@@ -23,7 +23,7 @@ const AiBot = () => {
             </div>
             <div className="flex-1">
                 <div className="flex justify-between items-center">
-                    <p className="font-semibold text-white text-sm">AI Assistant</p>
+                    <p className="font-semibold text-white text-sm">ChatzyBot</p>
                     <span className="text-lg text-cyan-400">✨</span>
                 </div>
                 <p className="text-xs text-gray-300 mt-1 italic">

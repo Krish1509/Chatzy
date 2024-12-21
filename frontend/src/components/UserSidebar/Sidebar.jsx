@@ -26,7 +26,7 @@ const Sidebar = ({ onOpenAiChat }) => {
             </div>
 
             {/* Conversations */}
-            <Conversations
+            <Conversations className="hide-scrollbar"
                 onSelectConversation={handleSelectConversation}
                 selectedConversationId={selected}
             />

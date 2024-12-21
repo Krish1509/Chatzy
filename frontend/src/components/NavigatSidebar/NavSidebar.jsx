@@ -4,11 +4,11 @@ import { useSocketContext } from '../../context/SocketContext';
 import LogoutButton from './LogoutButton';
 import Profile from "./Profile";
 import { IoClose } from 'react-icons/io5';
-import FullscreenButton from './FullscreenButton';
 import { IoIosHome, IoIosInformationCircle, IoIosSettings } from "react-icons/io";
 import { useNavigate } from 'react-router-dom';
 import Settings from './Settings/Settings'; // Import the new Settings component
-import AnimationIcon from "../AI_ChatBot/AnimatedIcon"
+import AnimationIcon from "../AI_ChatBot/AnimatedIcon";
+import ChatzyLogo from '../../assets/Chatzy_logo/ChatzyWithoutBG.png';
 
 const NavSidebar = () => {
     const navigate = useNavigate();
@@ -16,7 +16,7 @@ const NavSidebar = () => {
     const { onlineUsers } = useSocketContext();
     const profilePic = authUser?.profilePic || 'defaultProfilePic.png';
     const [isLogoutHovered, setIsLogoutHovered] = useState(false);
-    const [isProfileHovered, setIsProfileHovered] = useState(false);
+    const [, setIsProfileHovered] = useState(false);
     const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
     const [hoveredButton, setHoveredButton] = useState(null);
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
@@ -79,30 +79,55 @@ const NavSidebar = () => {
 
     return (
         <div ref={sidebarRef} className="flex flex-col h-full bg-[#6470800c] items-center relative border-r border-gray-400">
-            {/* Fullscreen Button */}
-            <div 
-                className="relative m-4 z-10"
-                onMouseEnter={() => setHoveredButton('fullscreen')}
-                onMouseLeave={() => setHoveredButton(null)}
-            >
-                <FullscreenButton onClick={() => console.log('Fullscreen button clicked')} />
-                {hoveredButton === 'fullscreen' && (
-                    <div className="absolute left-full transform -translate-y-1/2 ml-2 p-2 bg-gray-700 text-white text-sm font-semibold rounded shadow-lg">
-                        Fullscreen
-                    </div>
-                )}
+            {/* Logo Section */}
+           {/* Logo Section */}
+ {/* Logo Section */}
+ <div className="mt-1 flex justify-center relative transition-all duration-300 ease-out">
+                <a 
+                    href="#"
+                    onMouseEnter={() => setHoveredButton('Chatzy')}
+                    onMouseLeave={() => setHoveredButton(null)}
+                    className="relative"
+                >
+                    {/* Glowing Effect Background */}
+                    <div 
+                        className={`absolute inset-[14px]  rounded-full ${hoveredButton === 'Chatzy' ? 'glowing-hover' : 'glowing-normal'}`}
+                        style={{
+                            transition: 'box-shadow 0.3s ease',
+                            boxShadow: hoveredButton === 'Chatzy' ? '0 0 30px 10px rgba(59, 141, 153, 0.8)' : '0 0 15px 5px rgba(59, 141, 153, 0.4)',
+                            zIndex: '-1',  // Keep the glow behind the logo
+                        }}
+                    />
+                    {/* Logo Image */}
+                    <img
+                        src={ChatzyLogo}
+                        alt="Chatzy Logo"
+                        className={`w-16 h-auto sm:w-14 md:w-28 lg:w-24 max-w-full transition-all duration-300 ease-in-out transform ${hoveredButton === 'Chatzy' ? 'scale-110' : 'scale-100'} `}
+                    />
+                    {hoveredButton === 'Chatzy' && (
+                        <div className="absolute left-full transform -translate-y-1/2 ml-2 p-2 bg-gray-700 text-white text-sm font-semibold rounded shadow-lg">
+                            Chatzy
+                        </div>
+                    )}
+                </a>
             </div>
-            
+
+
+
             <hr className="w-3/4 border-t-1 border-gray-400 my-2" />
-            
+
             {/* Home Button */}
             <div className="flex flex-col items-center gap-6 mt-3">
                 <a 
                     href="#"
-                    className={`relative z-10 rounded-full ${selectedButton === 'home' ? 'bg-[#1F2937]' : ''}`}
+                    className={`relative  z-10 rounded-full ${selectedButton === 'home' ? 'bg-[#1F2937]' : ''} ${hoveredButton === 'home' ? 'glowing-hover' : ''}`}
                     onMouseEnter={() => setHoveredButton('home')}
                     onMouseLeave={() => setHoveredButton(null)}
                     onClick={handleHomeClick}
+                    style={{
+                        transition: 'box-shadow 0.3s ease',
+                        boxShadow: hoveredButton === 'home' ? '0 0 15px 5px rgba(59, 141, 153, 0.4)' : '0 0',
+                    }}
                 >
                     <IoIosHome className="text-white text-3xl cursor-pointer" />
                     {hoveredButton === 'home' && (
@@ -111,13 +136,17 @@ const NavSidebar = () => {
                         </div>
                     )}
                 </a>
-                
+
                 {/* About Button */}
-                <div 
-                    className={`relative z-10 rounded-full ${selectedButton === 'about' ? 'bg-[#1F2937]' : ''}`} 
+                <a 
+                    className={`relative  z-10 rounded-full ${selectedButton === 'about' ? 'bg-[#1F2937]' : ''} ${hoveredButton === 'home' ? 'glowing-hover' : ''}`}
                     onMouseEnter={() => setHoveredButton('about')}
                     onMouseLeave={() => setHoveredButton(null)}
                     onClick={handleAboutClick}
+                    style={{
+                        transition: 'box-shadow 0.3s ease',
+                        boxShadow: hoveredButton === 'about' ? '0 0 15px 5px rgba(59, 141, 153, 0.4)' : '0 0',
+                    }}
                 >
                     <IoIosInformationCircle className="text-3xl text-white cursor-pointer" />
                     {hoveredButton === 'about' && (
@@ -125,14 +154,18 @@ const NavSidebar = () => {
                             About
                         </div>
                     )}
-                </div>
+                </a>
 
                 {/* Settings Button */}
-                <div 
-                    className={`relative z-10 rounded-full ${selectedButton === 'settings' ? 'bg-[#1F2937]' : ''}`}
+                <a 
+                    className={`relative  z-10 rounded-full ${selectedButton === 'settings' ? 'bg-[#1F2937]' : ''} ${hoveredButton === 'home' ? 'glowing-hover' : ''}`}
                     onMouseEnter={() => setHoveredButton('settings')}
                     onMouseLeave={() => setHoveredButton(null)}
                     onClick={handleSettingsClick} 
+                    style={{
+                        transition: 'box-shadow 0.3s ease',
+                        boxShadow: hoveredButton === 'settings' ? '0 0 15px 5px rgba(59, 141, 153, 0.4)' : '0 0',
+                    }}
                 >
                     <IoIosSettings className="text-3xl text-white cursor-pointer" />
                     {hoveredButton === 'settings' && (
@@ -140,14 +173,18 @@ const NavSidebar = () => {
                             Settings
                         </div>
                     )}
-                </div>
+                </a>
 
                 {/* Chatbot Button */}
-                <div 
-                    className="relative z-10 rounded-full"
+                <a 
+                    className={`relative  z-10 rounded-full  ${hoveredButton === 'chatbot' ? 'glowing-hover' : ''}`}
                     onMouseEnter={() => setHoveredButton('chatbot')}
                     onMouseLeave={() => setHoveredButton(null)}
                     onClick={handleChatbotClick}
+                    style={{
+                        transition: 'box-shadow 0.3s ease',
+                        boxShadow: hoveredButton === 'chatbot' ? '0 0 15px 5px rgba(59, 141, 153, 0.4)' : '0 0',
+                    }}
                 >
                     <AnimationIcon />
                     {hoveredButton === 'chatbot' && (
@@ -155,7 +192,7 @@ const NavSidebar = () => {
                             Chatbot
                         </div>
                     )}
-                </div>
+                </a>
             </div>
 
             {/* Settings Box */}
@@ -171,10 +208,14 @@ const NavSidebar = () => {
             <div className="mt-auto my-4 flex flex-col items-center gap-6">
                 {/* Profile Button */}
                 <div
-                    className="relative cursor-pointer"
-                    onMouseEnter={() => setIsProfileHovered(true)}
+                    className={`relative z-10  rounded-full cursor-pointer ${hoveredButton === 'profile' ? 'glowing-hover' : ''}`}
+                    onMouseEnter={() => setIsProfileHovered('profile')}
                     onMouseLeave={() => setIsProfileHovered(false)}
                     onClick={handleProfileClick}
+                    style={{
+                        transition: 'box-shadow 0.3s ease',
+                        boxShadow: hoveredButton === 'Profile' ? '0 0 15px 5px rgba(59, 141, 153, 0.4)' : '0 0',
+                    }}
                 >
                     <div className="relative">
                         <img 
@@ -183,10 +224,15 @@ const NavSidebar = () => {
                             className={`w-10 h-10 rounded-full object-cover ${isOnline ? 'ring-2 ring-green-500' : ''}`}
                         />
                     </div>
-                    {isProfileHovered && (
+                    {/* {isProfileHovered && (
                         <div className="absolute right-0 transform translate-x-full bottom-full mb-1 w-40 p-2 bg-gray-700 text-white text-sm font-semibold rounded-full shadow-lg z-50">
                             This is your profile.
                         </div>
+                    )} */}
+                     {hoveredButton === 'profile' && (
+                        <div className="absolute left-full transform -translate-y-1/2 ml-2 p-2 bg-gray-700 text-white text-sm font-semibold rounded shadow-lg">
+                            This is your profile.
+                            </div>
                     )}
                 </div>
 
@@ -223,3 +269,4 @@ const NavSidebar = () => {
 };
 
 export default NavSidebar;
+

@@ -6,7 +6,7 @@ const Conversations = ({ onSelectConversation, selectedConversationId }) => {
     const { loading, conversations } = useGetConversations();
 
     return (
-        <div className="py-2 flex flex-col flex-1 overflow-auto">
+        <div className="py-2 flex flex-col flex-1 overflow-auto hide-scrollbar">
             {conversations.map((conversation, idx) => (
                 <Conversation
                     key={conversation._id}
