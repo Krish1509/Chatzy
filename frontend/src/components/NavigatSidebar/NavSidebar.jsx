@@ -224,11 +224,6 @@ const NavSidebar = () => {
                             className={`w-10 h-10 rounded-full object-cover ${isOnline ? 'ring-2 ring-green-500' : ''}`}
                         />
                     </div>
-                    {/* {isProfileHovered && (
-                        <div className="absolute right-0 transform translate-x-full bottom-full mb-1 w-40 p-2 bg-gray-700 text-white text-sm font-semibold rounded-full shadow-lg z-50">
-                            This is your profile.
-                        </div>
-                    )} */}
                      {hoveredButton === 'profile' && (
                         <div className="absolute left-full transform -translate-y-1/2 ml-2 p-2 bg-gray-700 text-white text-sm font-semibold rounded shadow-lg">
                             This is your profile.

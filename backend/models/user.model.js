@@ -21,10 +21,10 @@ const userSchema = new mongoose.Schema({
         required: true, // gender is required
         enum: ["male", "female"] // gender must be either "male" or "female"
     },
-    profilePic: {
-        type: String, // Data type for profilePic is String
-        default: "" // Default value for profilePic is an empty string
-    }
+    pprofilePic: {
+        type: String,
+        default: "",
+    },
 }, { timestamps: true }); // Automatically manage createdAt and updatedAt timestamps
 
 // Create the User model from the schema

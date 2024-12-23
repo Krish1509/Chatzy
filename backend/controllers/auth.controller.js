@@ -87,3 +87,27 @@ try {
     res.status(500).json({error:"Internal Server Error"})
 }};
 
+export const updateUserProfilePic = async (req, res) => {
+    try {
+        const { profilePic } = req.body;
+
+        if (!profilePic) {
+            return res.status(400).json({ success: false, error: "Profile picture is required" });
+        }
+
+        const updatedUser = await User.findByIdAndUpdate(
+            req.user._id,
+            { profilePic },
+            { new: true, select: "profilePic" }
+        );
+
+        if (!updatedUser) {
+            return res.status(404).json({ success: false, error: "User not found" });
+        }
+
+        res.status(200).json({ success: true, profilePic: updatedUser.profilePic });
+    } catch (error) {
+        console.error("Error updating profile picture:", error.message);
+        res.status(500).json({ success: false, error: "Internal server error" });
+    }
+};
