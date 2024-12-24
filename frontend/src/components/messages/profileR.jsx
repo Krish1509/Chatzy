@@ -10,6 +10,7 @@ const ProfileR = ({ selectedConversation }) => {
 
     return (
         <div className="relative flex flex-col items-center p-6 bg-gradient-to-b from-[#2C3E50] to-[#4A6274] rounded-lg max-w-sm mx-auto border-2 border-gray-700 shadow-2xl transform transition-transform hover:scale-105">
+           
             {/* Profile Picture with Online Indicator */}
             <div className="relative">
                 <img src={profilePic} alt="Profile" className="w-28 h-28 border-[4px] border-gray-700 rounded-full mb-4 shadow-xl" />

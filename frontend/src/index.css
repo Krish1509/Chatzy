@@ -72,7 +72,15 @@
 	  display: none;
 	}
   }
-  
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.animate-fadeIn {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
 @keyframes flipX {
 	0% {
 	  transform: rotateY(0deg) scale(1);

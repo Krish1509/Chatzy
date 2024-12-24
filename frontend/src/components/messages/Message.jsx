@@ -40,6 +40,10 @@ const Message = ({ message }) => {
 
     // Function to convert plain text to clickable links
     const formatMessageWithLinks = (msg) => {
+        if (!msg || typeof msg !== "string") {
+            return <span className="text-white">Invalid message</span>;
+        }
+    
         const parts = msg.split(urlRegex); // Split the message into parts
         return parts.map((part, index) => {
             // If the part matches the URL regex, return an anchor tag
@@ -50,7 +54,7 @@ const Message = ({ message }) => {
                         href={part} 
                         target="_blank" 
                         rel="noopener noreferrer" 
-                        className="text-[#FFFFFF] hover:text-gray-100 hover:underline  font-semibold cursor-pointer"
+                        className="text-[#FFFFFF] hover:text-gray-100 hover:underline font-semibold cursor-pointer"
                     >
                         {part}
                     </a>
@@ -60,6 +64,7 @@ const Message = ({ message }) => {
             return <span key={index} className="text-white">{part}</span>;
         });
     };
+    
 
     return (
         <div className={`chat ${chatClassName} overflow-x-hidden`}>
