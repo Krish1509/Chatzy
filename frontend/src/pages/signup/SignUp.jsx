@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import GenderCheckbox from './GenderCheckbox';
 import useSignUp from '../../hooks/useSignup';
-
 const SignUp = () => {
     const [inputs, setInputs] = useState({
         fullName: '',
@@ -28,15 +27,15 @@ const SignUp = () => {
     };
 
     return (
-        <div className='flex flex-col backdrop-blur-[10px] items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8'>
-            <div className="p-6 shadow-md w-full max-w-md bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-10">
-                <h1 className='text-3xl font-semibold text-center text-gray-300 mb-4'>
+        <div className='flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8'>
+            <div className="p-5 shadow-md w-full max-w-md bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-10">
+                <h1 className='text-2xl font-semibold text-center text-gray-300 mb-4'>
                     Sign Up <span className='text-blue-500'>ChatApp</span>
                 </h1>
 
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
-                        <label className='block text-base label-text mb-2 text-gray-100'>
+                        <label className='block text-base label-text mb-1 text-gray-100'>
                             Full Name
                         </label>
                         <input
@@ -49,7 +48,7 @@ const SignUp = () => {
                     </div>
 
                     <div className="mb-4">
-                        <label className='block text-base label-text mb-2 text-gray-100'>
+                        <label className='block text-base label-text mb-1 text-gray-100'>
                             Username
                         </label>
                         <input
@@ -62,7 +61,7 @@ const SignUp = () => {
                     </div>
 
                     <div className="mb-4 relative">
-                        <label className='block text-base label-text mb-2 text-gray-100'>
+                        <label className='block text-base label-text mb-1 text-gray-100'>
                             Password
                         </label>
                         <input
@@ -75,14 +74,14 @@ const SignUp = () => {
                         <button
                             type="button"
                             onClick={() => setShowPassword(!showPassword)}
-                            className='absolute inset-y-0 right-3 flex items-center mt-8'
+                            className='absolute inset-y-0 right-3 mt-6 flex items-center'
                         >
                             {showPassword ? <FaEyeSlash className='text-gray-400' /> : <FaEye className='text-gray-400' />}
                         </button>
                     </div>
 
                     <div className="mb-4 relative">
-                        <label className='block text-base label-text mb-2 text-gray-100'>
+                        <label className='block text-base label-text mb-1 text-gray-100'>
                             Confirm Password
                         </label>
                         <input
@@ -95,7 +94,7 @@ const SignUp = () => {
                         <button
                             type="button"
                             onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                            className='absolute inset-y-0 right-3 flex items-center mt-8'
+                            className='absolute inset-y-0 right-3 mt-6 flex items-center'
                         >
                             {showConfirmPassword ? <FaEyeSlash className='text-gray-400' /> : <FaEye className='text-gray-400' />}
                         </button>
@@ -103,17 +102,19 @@ const SignUp = () => {
 
                     <GenderCheckbox onCheckboxChange={handleCheckboxChange} selectedGender={inputs.gender} />
 
-                    <Link to='/login' className="text-sm hover:underline hover:text-blue-600 mt-2 inline-block text-gray-200">
+                    <Link to='/login' className="text-sm hover:underline hover:text-blue-600 mt-3 inline-block text-gray-200">
                         Already have an account?
                     </Link>
 
                     <div className="mt-4">
-                        <button className='btn btn-block btn-sm mt-2 text-gray-300 border-[#1D232A] hover:border-blue-600 bg-blue-600 rounded-md' type="submit" disabled={loading}>
+                        <button className='btn btn-block btn-sm text-gray-300 border-[#1D232A] hover:border-blue-600 bg-blue-600 rounded-md' type="submit" disabled={loading}>
                             {loading ? 'Signing Up...' : 'Sign Up'}
                         </button>
                     </div>
                 </form>
             </div>
+        <p className="mb-[-10px] mt-[10px] text-center  items-center ">© {new Date().getFullYear()} Chatzy by Krish Soni. All Rights Reserved.</p>
+            
         </div>
     );
 };

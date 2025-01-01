@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema({
         required: true, // gender is required
         enum: ["male", "female"] // gender must be either "male" or "female"
     },
-    pprofilePic: {
+    profilePic: {
         type: String,
         default: "",
     },

@@ -67,7 +67,7 @@ const NavSidebar = () => {
         setSelectedButton('about');
         navigate('/about');
     };
-
+  
     const handleBgChangeClick = () => {
         setIsBgChangerOpen(!isBgChangerOpen); // Toggle the BG Changer visibility
     };
@@ -139,7 +139,7 @@ const NavSidebar = () => {
 
                 {/* About Button */}
                 <a 
-                    className={`relative  z-10 rounded-full ${selectedButton === 'about' ? 'bg-[#1F2937]' : ''} ${hoveredButton === 'home' ? 'glowing-hover' : ''}`}
+                    className={`relative  z-10 rounded-full ${selectedButton === 'about' ? 'bg-[#1F2937]' : ''} ${hoveredButton === 'about' ? 'glowing-hover' : ''}`}
                     onMouseEnter={() => setHoveredButton('about')}
                     onMouseLeave={() => setHoveredButton(null)}
                     onClick={handleAboutClick}
@@ -155,7 +155,7 @@ const NavSidebar = () => {
                         </div>
                     )}
                 </a>
-
+ 
                 {/* Settings Button */}
                 <a 
                     className={`relative  z-10 rounded-full ${selectedButton === 'settings' ? 'bg-[#1F2937]' : ''} ${hoveredButton === 'home' ? 'glowing-hover' : ''}`}

@@ -100,7 +100,7 @@ const Message = ({ message }) => {
                     </div>
                 </div>
             </div>
-            <div className="chat-footer opacity-50 text-xs gap-1 items-center">{formattedTime}</div>
+            <div className="chat-footer opacity-50 text-xs gap-1 items-center">{formattedTime} </div>
         </div>
     );
 };

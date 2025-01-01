@@ -9,6 +9,7 @@ import ChatBot from './components/AI_ChatBot/AI_ChatBot_FullSize';
 import { useState, useEffect } from 'react';
 import Loader from './components/Loder/Loader'; // Ensure the correct path to your Loader component
 import CustomCursor from "./custom/CustomCursor"
+import ProfileLoder from "./pages/signup/ProfileLoder"
 function App() {
   const { authUser } = useAuthContext();
   const [loading, setLoading] = useState(true); // Loading state
@@ -35,9 +36,10 @@ function App() {
       <Routes>
         <Route path='/' element={authUser ? <Home /> : <Navigate to='/login' />} />
         <Route path='/login' element={authUser ? <Navigate to='/' /> : <Login />} />
-        <Route path='/signup' element={authUser ? <Navigate to='/' /> : <SignUp />} />
+        <Route path='/signup' element={authUser ? <ProfileLoder/> : <SignUp />} />
         <Route path='/about' element={<About />} />
-        <Route path='/chatbot' element={<ChatBot />} />
+        <Route path='/ChatBot' element={<ChatBot />} />
+        
       </Routes>
       <Toaster />
     </div>

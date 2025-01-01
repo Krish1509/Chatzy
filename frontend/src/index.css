@@ -1,31 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* *,
-*:hover,
-*:active,
-*:focus {
-  cursor: none !important;
-} */
-/* Hide the default cursor */
-  
-  /* Hide scrollbar globally for all elements */
-* {
-	scrollbar-width: none; /* Hides scrollbar for Firefox */
-	-ms-overflow-style: none; /* Hides scrollbar for Internet Explorer */
-  }
-  
-  *::-webkit-scrollbar {
-	display: none; /* Hides scrollbar for WebKit browsers like Chrome, Safari, Edge */
-  }
-  
-  /* Hide the default cursor for the entire app */
 
- /* Hide default cursor globally */
-/* body, * {
-	cursor: none;
-  } */
-  
   /* Base custom cursor */
   .custom-cursor {
 	position: fixed;
@@ -133,35 +109,7 @@ body {
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
-}/* Custom Scrollbar Style */
-::-webkit-scrollbar {
-	width: 8px; /* Width of the scrollbar */
-	height: 8px; /* Height of the scrollbar (for horizontal scrollbars) */
-  }
-  
-  ::-webkit-scrollbar-thumb {
-	background-color: rgba(0, 0, 0, 0.6); /* Color of the scrollbar thumb */
-	border-radius: 4px; /* Rounded corners for the thumb */
-	cursor: pointer; /* Change cursor to pointer */
-  }
-  
-  ::-webkit-scrollbar-track {
-	background-color: rgba(0, 0, 0, 0.1); /* Background of the scrollbar track */
-	border-radius: 4px; /* Rounded corners for the track */
-  }
-  
-  /* For Firefox */
-  .scroll-container {
-	scrollbar-width: thin; /* Use a thin scrollbar */
-	scrollbar-color: rgba(0, 0, 0, 0.6) rgba(0, 0, 0, 0.1); /* Colors for thumb and track */
-	cursor: pointer; /* Change cursor to pointer */
-  }
-  
-  /* Example for applying custom scroll to a container */
-  .scrollable {
-	overflow-y: auto; /* Enable vertical scrolling */
-	max-height: 100%; /* Limit height for scrolling */
-  }
+}
   
 .video-background {
     position: fixed;
@@ -185,22 +133,7 @@ body {
     background-size: cover;
     background-position: center;
 }
-body::-webkit-scrollbar {
-	width: 8px;
-}
 
-body::-webkit-scrollbar-track {
-	background: #555;
-}
-
-body::-webkit-scrollbar-thumb {
-	background: #121212;
-	border-radius: 5px;
-}
-
-body::-webkit-scrollbar-thumb:hover {
-	background: #242424;
-}
 @keyframes send-animation {
     0% {
         transform: translateX(100%);
@@ -454,3 +387,55 @@ body::-webkit-scrollbar-thumb:hover {
 .animate-progress {
 	animation: progress 4s linear infinite;
 }
+@keyframes food-floating {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+.animate-food-floating img {
+  animation: food-floating 5s infinite ease-in-out;
+}
+.typing-animation {
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 3px solid transparent;
+    animation: typing 4s steps(30, end), blink 0.5s step-end infinite alternate;
+  }
+  
+  @keyframes typing {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+  
+  @keyframes blink {
+    from {
+      border-color: transparent;
+    }
+    to {
+      border-color: blue;
+    }
+  }
+  
+  .floating-quotes {
+    animation: floating 3s infinite alternate;
+  }
+  
+  @keyframes floating {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-10px);
+    }
+  }
+  

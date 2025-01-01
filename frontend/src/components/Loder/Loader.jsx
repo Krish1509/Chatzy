@@ -21,7 +21,7 @@ const Loader = () => {
     <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900">
       <div className="text-center">
         {/* Animated Title with 3D Effect */}
-        <h1 className="text-gray-300 text-5xl font-extrabold mb-6 animate-bounce md:text-6xl lg:text-7xl shadow-lg">
+        <h1 className="text-gray-300 text-5xl font-extrabold mb-6 animate-bounce md:text-6xl lg:text-7xl ">
           Welcome to Chatzy
         </h1>
 

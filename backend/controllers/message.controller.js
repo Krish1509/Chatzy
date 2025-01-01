@@ -53,13 +53,13 @@ export const getMessages = async (req, res) => {
 
         const messages = conversation.messages;
         res.status(200).json(messages);
+      
 
     } catch (error) {
         console.error("Error in getMessages controller:", error.message);
         res.status(500).json({ error: "Internal server error" });
     }
 };
-
 
 export const deleteMessage = async (req, res) => {
     try {

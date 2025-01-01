@@ -59,6 +59,8 @@ const Login = () => {
                     </div>
                 </form>
             </div>
+            <p className="mb-[-90px] mt-[90px] flex justify-center items-center text-center">© {new Date().getFullYear()} Chatzy by Krish Soni. All Rights Reserved.</p>
+
         </div>
     );
 };

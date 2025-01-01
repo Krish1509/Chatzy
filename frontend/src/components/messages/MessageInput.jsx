@@ -86,13 +86,13 @@ const MessageInput = ({ inputRef }) => {
                     </div>
 
                     {/* Image Upload Button (Between Input and Send Button) */}
-                    <button
+                    {/* <button
                         type="button"
                         className="text-white bg-gray-700 hover:bg-gray-600 p-3 rounded-full transform hover:scale-110 transition-all duration-300"
                         onClick={() => fileInputRef.current.click()}
                     >
                         <BsImage size={20} />
-                    </button>
+                    </button> */}
                     {/* Hidden file input */}
                     <input
                         ref={fileInputRef}
@@ -105,7 +105,7 @@ const MessageInput = ({ inputRef }) => {
                     {/* Send Button */}
                     <button
                         type="submit"
-                        className={`text-white bg-sky-500 hover:bg-sky-400 p-3 rounded-full ${loading ? 'opacity-50' : ''} transform hover:scale-110 transition-all duration-300`}
+                        className={`text-white bg-sky-600 hover:bg-sky-400 p-3 rounded-full ${loading ? 'opacity-50' : ''} transform hover:scale-110 transition-all duration-300`}
                     >
                         {loading ? <div className='loading loading-spinner'></div> : <BsSend size={20} />}
                     </button>
@@ -131,7 +131,7 @@ const MessageInput = ({ inputRef }) => {
                 </div>
             )}
 
-            {/* Image Preview */}
+            {/* Image Preview
             {selectedImage && (
                 <div className="absolute bottom-16 left-0 z-50 bg-gray-700 p-2 rounded-lg shadow-lg transition-all transform hover:scale-105">
                     <div className="relative">
@@ -149,7 +149,7 @@ const MessageInput = ({ inputRef }) => {
                         </button>
                     </div>
                 </div>
-            )}
+            )} */}
         </div>
     );
 };

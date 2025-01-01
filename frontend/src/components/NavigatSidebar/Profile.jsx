@@ -8,16 +8,16 @@ const Profile = () => {
   const { onlineUsers } = useSocketContext();
   const [previewPic, setPreviewPic] = useState(authUser?.profilePic || "defaultProfilePic.png");
   const [uploadedPic, setUploadedPic] = useState(null);
-  const [isUploading, setIsUploading] = useState(false); // Loading state
+  const [isUploading, setIsUploading] = useState(false);
 
   const isOnline = authUser && onlineUsers.includes(authUser._id);
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file && file.type.startsWith("image/")) {
-      setUploadedPic(file); // Save the file for upload
+      setUploadedPic(file);
       const reader = new FileReader();
-      reader.onloadend = () => setPreviewPic(reader.result); // Preview the image
+      reader.onloadend = () => setPreviewPic(reader.result);
       reader.readAsDataURL(file);
     } else {
       alert("Please select a valid image file.");
@@ -34,28 +34,28 @@ const Profile = () => {
     formData.append("profilePic", uploadedPic);
 
     try {
-      setIsUploading(true); // Set loading state
+      setIsUploading(true);
       const response = await fetch("/api/users/update-profile", {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${authUser.token}`, // Pass the JWT token
+          Authorization: `Bearer ${authUser.token}`,
         },
-        body: formData, // Send as multipart/form-data
+        body: formData,
       });
 
       const result = await response.json();
 
       if (result.success) {
-        setAuthUser((prev) => ({ ...prev, profilePic: result.profilePic })); // Update profile picture in context
+        setAuthUser((prev) => ({ ...prev, profilePic: result.profilePic }));
         alert("Profile picture updated successfully!");
       } else {
         alert(result.error || "Failed to update profile picture.");
       }
     } catch (error) {
       console.error("Error updating profile picture:", error);
-      alert("An error occurred. Please try again.");
+      alert("Error updating profile picture:");
     } finally {
-      setIsUploading(false); // Reset loading state
+      setIsUploading(false);
     }
   };
 
