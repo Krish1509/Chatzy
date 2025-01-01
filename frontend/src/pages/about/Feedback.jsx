@@ -15,12 +15,12 @@ const Feedback = () => {
 
     emailjs
       .sendForm(
-        import.meta.env.REACT_APP_EMAILJS_SERVICE_ID ,
-        import.meta.env.REACT_APP_EMAILJS_TEMPLATE_ID ,
+        process.env.REACT_APP_EMAILJS_SERVICE_ID ,
+        process.env.REACT_APP_EMAILJS_TEMPLATE_ID ,
         // "service_8b7518f",
         // "template_2862hct",
         form.current,
-        import.meta.env.REACT_APP_EMAILJS_PUBLIC_KEY ,
+        process.env.REACT_APP_EMAILJS_PUBLIC_KEY ,
         // "MYNutjC2EHz6Kt3We"
       )
       .then(
