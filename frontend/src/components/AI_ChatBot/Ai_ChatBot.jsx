@@ -29,7 +29,9 @@ const Ai_ChatBot = ({ onClose }) => {
   
     try {
       const response = await axios({
-        url: `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${process.env.GEMINI_API_KEY}`,
+        // url: `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${process.env.VITE_API_KEY}`,
+        url: `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=AIzaSyCJIszE8M44WnLq7rLCmXcYK7xVTLgTBcs`,
+
         method: "post",
         data: {
           contents: [{ parts: [{ text: currentQuestion }] }],  
@@ -63,7 +65,7 @@ const Ai_ChatBot = ({ onClose }) => {
           <span className="text-white text-sm">Online</span>
         </div>
       </header>
-
+    
       {/* Close button */}
       <div className="absolute top-4 right-4">
         <button
