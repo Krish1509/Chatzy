@@ -1,19 +1,20 @@
 import react from "./TechLogo/react.png";
 import node from "./TechLogo/node.png";
-import ex from "./TechLogo/ex.png";
-import mongodb from "./TechLogo/mongodb.png";
-import jwt from "./TechLogo/jwt.png";
-import bcrypt from "./TechLogo/bcrypt.jpg";
-import zustand from "./TechLogo/zustand.jpg";
-import gemini from "./TechLogo/Gemini.png";
-import daisy from "./TechLogo/daisy.png";
-import motions from "./TechLogo/motion.jpg";
-import socket from "./TechLogo/socket.png";
-import tailwind from "./TechLogo/tailwind.png";
-import three from "./TechLogo/three.png";
-import cloudinary from "./TechLogo/cloudinary.png";
-import EmailJS from "./TechLogo/EmailJS.png";
-import render from "./TechLogo/render.png";
+import ex from "./TechLogo/image-removebg-preview (2).png";
+import mongodb from "./TechLogo/mongodb-removebg-preview.png";
+import jwt from "./TechLogo/jwt-removebg-preview.png";
+import bcrypt from "./TechLogo/bcrypt-removebg-preview.png";
+import zustand from "./TechLogo/zustand-removebg-preview.png";
+import gemini from "./TechLogo/Gemini-removebg-preview.png";
+import daisy from "./TechLogo/daisy-removebg-preview.png";
+import motions from "./TechLogo/motion-removebg-preview.png";
+import socket from "./TechLogo/socket-removebg-preview.png";
+import tailwind from "./TechLogo/tailwind-removebg-preview.png";
+import three from "./TechLogo/three-removebg-preview.png";
+import cloudinary from "./TechLogo/cloudinay-removebg-preview.png";
+import EmailJS from "./TechLogo/EmailJS-removebg-preview.png";
+import render from "./TechLogo/render-removebg-preview.png";
+import Vite from "./TechLogo/Vite.png";
 
 const AboutTech = () => {
   
@@ -34,7 +35,8 @@ const AboutTech = () => {
     { name: "Cloudinary", logo: cloudinary, url: "https://cloudinary.com", category: "Tools", important: true },
     { name: "Three.js", logo: three, url: "https://threejs.org", category: "Frontend", important: true },
     { name: "Gemini", logo: gemini, url: "https://www.gemini.com", category: "Backend" , important: true},
-    { name: "Render", logo: render, url: "https://www.onrender,com", category: "Hosting" , important: true},
+    { name: "Render", logo: render, url: "https://www.onrender.com", category: "Hosting" , important: true},
+    { name: "Vite", logo: Vite, url: "https://vite.dev/", category: "Tooling" , important: true},
 
   ];
 
@@ -90,7 +92,7 @@ const AboutTech = () => {
     transform: translateX(100%);
   }
   100% {
-    transform: translateX(-300%);
+    transform: translateX(-350%);
   }
 }
 
@@ -101,7 +103,7 @@ const AboutTech = () => {
       transform: translateX(100%);
     }
     100% {
-      transform: translateX(-500%);
+      transform: translateX(-600%);
     }
   }
 }
@@ -113,7 +115,7 @@ const AboutTech = () => {
       transform: translateX(100%);
     }
     100% {
-      transform: translateX(-1600%);
+      transform: translateX(-1700%);
     }
   }
 }
@@ -125,7 +127,7 @@ const AboutTech = () => {
       transform: translateX(100%);
     }
     100% {
-      transform: translateX(-300%);
+      transform: translateX(-350%);
     }
   }
 }

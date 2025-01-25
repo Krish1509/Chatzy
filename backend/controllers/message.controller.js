@@ -72,12 +72,10 @@ export const deleteMessage = async (req, res) => {
   
       const senderId = req.user._id;
   
-      console.log(`Attempting to delete message with ID: ${id} by user: ${senderId}`);
   
       // Find the message to be deleted
       const messageToDelete = await Message.findById(id);
       if (!messageToDelete) {
-        console.log(`Message with ID: ${id} not found`);
         return res.status(404).json({ error: 'Message not found' });
       }
   

@@ -7,7 +7,7 @@ const protectRoute = async (req, res, next) => {
         const token = req.cookies?.jwt;
 
         if (!token) {
-            return res.status(401).json({ error: "Unauthorized - No Token Provided" });
+            return res.status(401).json({ error: "Login Timeout - plz logout & login again" });
         }
 
         // Verify the token
@@ -15,7 +15,7 @@ const protectRoute = async (req, res, next) => {
         try {
             decoded = jwt.verify(token, process.env.JWT_SECRET);
         } catch (err) {
-            return res.status(401).json({ error: "Unauthorized - Invalid Token" });
+            return res.status(401).json({ error: "Login Timeout - plz logout & login again" });
         }
 
         // Check if the user exists in the database
